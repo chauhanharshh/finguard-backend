@@ -22,12 +22,12 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/6.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-gqqk#y=*q!xaxbv$#)r1v-na4zdu1#48(sz2gr_*_q)-b-s_hl'
+SECRET_KEY = os.environ.get('SECRET_KEY', 'django-insecure-gqqk#y=*q!xaxbv$#)r1v-na4zdu1#48(sz2gr_*_q)-b-s_hl')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = os.environ.get('DEBUG', 'False') == 'True'
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -84,11 +84,11 @@ WSGI_APPLICATION = 'backend.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'finguard_db_511a',
-        'USER': 'finguard_db_511a_user',
-        'PASSWORD': '3l9TSZ0YyXK80YhZ9RGyUqTBHovFDiQ7',
-        'HOST': 'dpg-d7ueb6rtqb8s73eut21g-a.singapore-postgres.render.com',
-        'PORT': '5432',
+        'NAME': os.environ.get('DB_NAME'),
+        'USER': os.environ.get('DB_USER'),
+        'PASSWORD': os.environ.get('DB_PASSWORD'),
+        'HOST': os.environ.get('DB_HOST'),
+        'PORT': os.environ.get('DB_PORT', '5432'),
     }
 }
 
